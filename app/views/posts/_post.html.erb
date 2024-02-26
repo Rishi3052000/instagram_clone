@@ -1,4 +1,4 @@
-<div id="<%= dom_id post %>" class="post-container">
+<div id="<%= dom_id post %>" class=" text-center post-container col-6" style="margin: auto;">
   <p>
     
     <%= post.title %>
@@ -6,13 +6,13 @@
 
   <p>
     
-    <%= post.description %>
+    <%#= post.description %>
   </p>
 
-  <p>
+  <!--<p>
     
     <%= post.keywords %>
-  </p>
+  </p>-->
 
   <!--<div class="post">
   <p>
@@ -25,11 +25,33 @@
   
 
   <p>
-      <%= link_to "", post, class:"post-link", style:"z-index:" %>
+      <%#= link_to "", post, class:"post-link", style:"z-index:" %>
   </p>
+
+  
+
+ 
+
   <% post.images.each do |image| %>
     <%= image_tag(image,style: "object-fit: cover; width: 400px; height: 600px;") %>
   <% end %>
+  <br>
+  <br>
+  <% if user_signed_in? %>
+    <% like = current_user.likes.find_by(post: post) %>
+    <% if like.nil? %>
+      <%= button_to "like", likes_path, params: { like: { post_id: post.id }}, method: :post, class: "btn btn-outline-success" %>
+      
+    <% else %>
+      <%= button_to "Unlike", like_path(like), method: :delete, class: "btn btn-outline-danger" %>
+    <% end %>
+  <% end %>
+
+  <p>
+      <%= post.likes.count %>
+      likes
+  </p>
+
 </div>
 
 <p>
