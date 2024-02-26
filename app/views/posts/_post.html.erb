@@ -14,10 +14,24 @@
     <%= post.keywords %>
   </p>
 
+  <!--<div class="post">
   <p>
-      <%= link_to "", post, class:"post-link" %>
+    <%= "Posted by: #{post.user&.email}" %>
+  </p>
+
+  
+  </div>-->
+
+  
+
+  <p>
+      <%= link_to "", post, class:"post-link", style:"z-index:" %>
   </p>
   <% post.images.each do |image| %>
     <%= image_tag(image,style: "object-fit: cover; width: 400px; height: 600px;") %>
   <% end %>
 </div>
+
+<p>
+    <%= link_to post.user.email, post.user,  style:"z-index:" %>
+</p>
